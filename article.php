@@ -1,25 +1,13 @@
 <?php
 
 require 'includes/database.php';  
+require 'includes/article-get-id.php';
 
 $conn = getDB();
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
-	$sql = "SELECT *
-					FROM article
-					WHERE id = " . $_GET['id'];
-
-	//send query to the database
-	$results = mysqli_query($conn,$sql);
-
-	//would return false on error
-	if ($results === false) {
-		echo mysqli_error($conn);
-	} else {
-		// $articles = mysqli_fetch_all($results, MYSQLI_ASSOC); //returns an array with results
-			$article = mysqli_fetch_assoc($results); //fetch a single line
-	}
+	$article = getArticle($conn, $_GET['id']);
 
 } else {
 	$article = null;
