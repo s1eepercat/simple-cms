@@ -1,0 +1,183 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+*:link,
+*:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding: 5rem;
+}
+
+header > h1 {
+    font-size: 4.8rem;
+}
+
+main {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+main > a {
+    font-size: 2.4rem;
+    color: teal !important;
+    border: 1px solid teal;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 20%;
+    align-self: center;
+    transition: all .3s;
+}
+
+main > a:hover {
+    transform: scale(1.03);
+}
+
+ul {
+    list-style: none;
+    margin: 2rem 2rem;
+    border: 1px solid teal;
+    padding: 5rem 20rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+li {
+    border: 1px solid teal;
+    width: 45%;
+    height: 13rem;
+    margin: 2rem 1rem;
+    text-align: left;
+    transition: all .3s;
+}
+
+li:hover {
+    transform: scale(1.03);
+}
+
+article > h2 {
+    background-color: teal;
+    font-size: 2.4rem;
+    color: white;
+    padding: 1rem 2rem;
+}
+
+article > h2 > a {
+    width: 100%;
+    display: block;
+    text-decoration: underline !important;
+    text-decoration-color: initial;
+}
+
+article > p {
+    font-size: 1.8rem;
+    padding: 2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Article Reading */
+
+.article-header {
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.article {
+    text-overflow: initial;
+    white-space: initial;
+    overflow: initial;
+    margin: 3rem 25%;
+    border: 1px solid teal;
+}
+
+/* Article Writing */
+
+main > h2 {
+    font-size: 3.2rem;
+    padding: 2rem;
+}
+
+.title {
+    width: 50%;
+    background-color: teal;
+    color: white;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.content  {
+    width: 50%;
+    background-color: teal;
+    color: white;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.published-at  {
+    width: 50%;
+    background-color: teal;
+    color: white;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+label {
+    font-size: 1.8rem;
+    padding: 1rem;
+    width: 200px;
+}
+
+input {
+    font-size: 1.8rem;
+    padding: 1rem;
+    display: inline-block;
+    width: 100%;
+}
+
+textarea {
+    font-size: 1.8rem;
+    padding: 1rem;
+    display: inline-block;
+    width: 100%;
+    resize: none;
+}
+
+button {
+    font-size: 2.4rem;
+    color: teal !important;
+    border: 1px solid teal;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 20%;
+    align-self: center;
+    transition: all .3s;
+}
+
+button > a:hover {
+    transform: scale(1.03);
+}

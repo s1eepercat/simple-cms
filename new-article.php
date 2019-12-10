@@ -1,8 +1,9 @@
 <?php
 
 require 'includes/database.php';
+require 'includes/article-get-id.php';
+require 'includes/url.php';
 
-$errors = [];
 $title = '';
 $content = '';
 $published_at = '';
@@ -13,27 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //submiting the form
     $content = $_POST['content'];
     $published_at = $_POST['published_at'];
 
-    if ($title == '') {
-         $errors[] = 'Title is required';
-    }
-
-    if ($content == '') {
-        $errors[] = 'Content is required';
-    }
-
-    if ($published_at != '') {
-        $date_time = date_create_from_format('Y-m-d H:i:s', $published_at);
-
-        if ($date_time === false) {
-            $errors[] = 'Invalid date and time';
-        } else {
-            $date_errors = date_get_last_errors();
-
-            if ($date_errors['warning_count'] > 0) {
-                $errors[] = 'Invalid date and time';
-            }
-        }
-    }
+    $errors = validateArticle($title,$content,$published_at);
 
     if (empty($errors)) {
 
@@ -60,14 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //submiting the form
 
                 $id = mysqli_insert_id($conn); //gets the id of inserting into db
                
-                if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
-                    $protocol = 'https';
-                } else {
-                    $protocol = 'http';
-                }
-
-                header("Location: $protocol://". $_SERVER['HTTP_HOST'] . "/udemy/article.php?id=$id"); //redirection
-                exit; //exiting script after a redirect is a good practice
+                redirect("/udemy/article.php?id=$id");
 
             } else {
                 echo mysqli_stmt_error($stmt);
@@ -85,33 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //submiting the form
 
 <h2>New article</h2>
 
-<?php if (! empty($errors)) : ?>
-    <ul>
-        <?php foreach ($errors as $error): ?>
-            <li><?= $error ?></li>
-        <?php endforeach; ?>
-    </ul>
-<?php  endif; ?>
-
-<form method="post">
-    
-    <div>
-        <label for="title">Title</label>
-        <input name="title" id="title" placeholder="Article Title" value="<?= htmlspecialchars($title); ?>"> <!-- htmlspecialchars is to avoid XSS attack (cross-site scripting) -->
-    </div>
-
-    <div>
-        <label for="content">Content</label>
-        <textarea name="content" rows="4" cols="40" id="content" placeholder="Article Content"><?= htmlspecialchars($content); ?></textarea>
-    </div>
-
-    <div>
-        <label for="published_at">Publication date and time</label>
-        <input type="datetime-local" name="published_at" id="published_at" value="<?= htmlspecialchars($published_at); ?>">
-    </div>
-
-    <button>Add</button>
-
-</form>
+<?php require 'includes/article-form.php'; ?>
 
 <?php require 'includes/footer.php' ?>
