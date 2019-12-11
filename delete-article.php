@@ -8,13 +8,10 @@ $conn = getDB();
 
 if (isset($_GET['id'])) {
 
-	$article = getArticle($conn, $_GET['id']);
+	$article = getArticle($conn, $_GET['id'], 'id');
 
 	if ($article) {
 		$id = $article['id'];
-		$title = $article['title'];
-		$content = $article['content'];
-		$published_at = $article['published_at'];
 	} else {
 		die('article not found');
 	}
@@ -23,7 +20,9 @@ if (isset($_GET['id'])) {
 	die('id not supplied, article not found');
 }
 
-$sql = "DELETE FROM article WHERE id = ?";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $sql = "DELETE FROM article WHERE id = ?";
  
         $stmt = mysqli_prepare($conn,$sql);
 
@@ -45,3 +44,19 @@ $sql = "DELETE FROM article WHERE id = ?";
             } 
 
         }
+
+    }
+
+?>
+
+<?php require 'includes/header.php'; ?>
+
+<h2>Delete article</h2>
+
+<form method="post">
+    <p>Are you sure?</p>
+	<button>Delete</button>
+    <a href="article.php?id= <?= $article['id']; ?> ">Cancel</a>
+</form>
+
+<?php require 'includes/footer.php'; ?>
